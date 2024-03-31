@@ -14,9 +14,11 @@ datasource db {
 }
 
 model Produit {
-  id       Int    @id
-  barecode String @unique
-  name     String
+  id        Int     @id
+  barecode  String  @unique
+  name      String
+  fabricant String?
+  imageUrl  String?
 
   prix prix[]
 }
@@ -28,10 +30,11 @@ model Supermarche {
 }
 
 model prix {
-  idprod      Int
-  supermarcheid         Int
-  produit     Produit     @relation(fields: [idprod], references: [id])
-  supermarche Supermarche @relation(fields: [supermarcheid], references: [id])
+  idprod        Int
+  supermarcheid Int
+  prix          Float
+  produit       Produit     @relation(fields: [idprod], references: [id])
+  supermarche   Supermarche @relation(fields: [supermarcheid], references: [id])
 
   @@id([idprod, supermarcheid])
 }
